@@ -1,0 +1,71 @@
+<!-- Start content -->
+<div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card-box">
+                        <h4 class="header-title m-t-0">{{#if editMode}}Actualizar Propiedad{{else}}Crear Propiedad{{/if}}</h4>
+                        <p class="text-muted font-14 m-b-20">
+                        </p>
+
+                        <form action="{{#if editMode}}/edit-client{{else}}/add-client{{/if}}" method="post">
+                            <div class="form-group">
+                                <label for="name">Nombres<span class="text-danger">*</span></label>
+                                <input type="text" name="name" parsley-trigger="change" required
+                                       placeholder="Ingresar nombre" class="form-control" id="name"
+                                       value="{{#if editMode}} {{client.name}} {{/if}}"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Apellidos<span class="text-danger">*</span></label>
+                                <input type="text" name="lastName" parsley-trigger="change" required
+                                       placeholder="Ingresar Apellido" class="form-control" id="lastName"
+                                       value="{{#if editMode}} {{client.lastName}} {{/if}}" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Numero de Telefono <span class="text-danger">*</span></label>
+                                <div>
+                                    <input data-parsley-type="number" type="text" name="phone"
+                                           class="form-control" required
+                                           data-parsley-minlength="9"
+                                           placeholder="Ingresar solo numeros (Minimo 9)" id="phone"
+                                           value="{{#if editMode}} {{client.phone}} {{/if}}"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" >Email<span class="text-danger">*</span></label>
+                                <div>
+                                    <input type="email" name = "email" required parsley-type="email" class="form-control"
+                                           id="email" placeholder="ingresar Email"
+                                           value="{{#if editMode}} {{client.email}} {{/if}}"
+                                    />
+                                </div>
+                            </div>
+                            <div><input type="hidden" value="{{client._id}}" name="clientId" ></div>
+
+                            <div class="form-group text-right m-b-0">
+                                <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                    {{#if editMode}}Actualizar{{else}}Crear{{/if}}
+                                </button>
+                                <button href="/clients" class="btn btn-secondary waves-effect m-l-5">
+                                    Cancel
+                                </button>
+                            </div>
+
+                        </form>
+                    </div> <!-- end card-box -->
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+

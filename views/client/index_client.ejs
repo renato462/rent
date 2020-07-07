@@ -1,0 +1,16 @@
+
+<%- include('../includes/0_head.ejs') %>
+
+<%- include('../includes/1_top_bar.ejs'); -%>
+
+<%- include('../includes/2_left_sidebar.ejs'); -%>
+
+<% if (editing) { %>
+    <%- include('3_add_client.ejs'); -%>
+    <%} else { %>
+        <%- include('3_table_client.ejs'); -%>
+    <% } %>
+
+<%- include('../includes/4_right_sidebar.ejs'); -%>
+
+<%- include('../includes/5_end'); -%>
