@@ -3,7 +3,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const expressHbs = require('express-handlebars');
 
 const app = express();
 
@@ -15,24 +14,7 @@ const Client = require('./model/client');
 const Property = require('./model/property');
 const  User = require('./model/user');
 
-
-// Enginer for views
-const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
-
-app.engine(
-    'hbs',
-    expressHbs({
-        layoutsDir: 'views/layouts/',
-        defaultLayout: 'main-layout',
-        partialsDir:'view/partial',
-        extname: 'hbs',
-        handlebars: allowInsecurePrototypeAccess(Handlebars)
-    })
-);
-//app.set('view engine','ejs');
-
-app.set('view engine','hbs');
+app.set('view engine','pug');
 app.set('views',path.join(__dirname,'views'));
 
 // Public route and Bodypaser for requests

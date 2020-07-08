@@ -1,0 +1,49 @@
+extends ../layouts/main-layout.pug
+
+block content
+    .content
+    .container-fluid
+    .row
+       .col-lg-12
+           .card-box
+                h4.header-title.m-t-0
+                    if editMode
+                        |Actualizar Cliente
+                    else
+                        |Crer Cliente
+                p.text-muted.font-14.m-b-20
+                form(action=editMode ? '/edit-client':'/add-client', method='post')
+                    .form-group
+                    label(for='name')
+                        | Nombres
+                        span.text-danger *
+                    input#name.form-control(type='text', name='name', parsley-trigger='change', required='', placeholder='Ingresar nombre', value=editMode ? ''+ client.name +'':'')
+                    .form-group
+                    label(for='lastName')
+                        | Apellidos
+                        span.text-danger *
+                    input#lastName.form-control(type='text', name='lastName', parsley-trigger='change', required='', placeholder='Ingresar Apellido', value=editMode ? ''+ client.lastName +'':'')
+                    .form-group
+                    label
+                        | Numero de Telefono 
+                        span.text-danger *
+                    div
+                        input#phone.form-control(data-parsley-type='number', type='text', name='phone', required='', data-parsley-minlength='9', placeholder='Ingresar solo numeros (Minimo 9)', value=editMode ? ''+ client.phone +'':'')
+                    .form-group
+                    label(for='email')
+                        | Email
+                        span.text-danger *
+                    div
+                        input#email.form-control(type='email', name='email', required='', parsley-type='email', placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
+                    .form-group
+                    div
+                        input(type='hidden', value=editMode ? ''+client._id+'':'', name='clientId')
+                    .form-group.text-right.m-b-0
+                        button.btn.btn-primary.waves-effect.waves-light(type='submit')
+                            if editMode
+                                | Actualizar
+                            else
+                                |Crear
+                        button.btn.btn-secondary.waves-effect.m-l-5(href='/clients')
+                            | Cancel
+    
