@@ -19,6 +19,11 @@ router.post('/delete-client',clientController.postDeleteClient);
 
 // Admin Crear Property (propiedad) => GET /admin
 router.get('/properties',propertyController.getProperties);
+router.get('/add-property', propertyController.getAddProperty);
+
+// Admin Crear Property (propiedad) => POST /adminRouter
+
+router.post('/add-property', propertyController.postAddProperty);
 
 module.exports = router;
 

@@ -1,0 +1,49 @@
+extends ../layouts/main-layout.pug
+
+block content
+    .content
+    .container-fluid
+    .row
+       .col-lg-12
+           .card-box
+                h4.header-title.m-t-0
+                    if editMode
+                        |Actualizar Propiedades
+                    else
+                        |Crer Propiedades
+                p.text-muted.font-14.m-b-20
+                form(action=editMode ? '/edit-property':'/add-property', method='post')
+                    .form-group
+                    label(for='adressNickname')
+                        | Nickname
+                        span.text-danger *
+                    input#name.form-control(type='text', name='adressNickname', parsley-trigger='change', required='', placeholder='Ingresar Nickname', value=editMode ? ''+ property.adressNickname +'':'')
+                    .form-group
+                    label(for='adress')
+                        | Direccion
+                        span.text-danger *
+                    input#lastName.form-control(type='text', name='adress', parsley-trigger='change', required='', placeholder='Ingresar Direccion', value=editMode ? ''+ property.adress +'':'')
+                    //- .form-group
+                    //- label
+                    //-     | Numero de Telefono 
+                    //-     span.text-danger *
+                    //- div
+                    //-     input#phone.form-control(data-parsley-type='number', type='text', name='phone', required='', data-parsley-minlength='9', placeholder='Ingresar solo numeros (Minimo 9)', value=editMode ? ''+ client.phone +'':'')
+                    //- .form-group
+                    //- label(for='email')
+                    //-     | Email
+                    //-     span.text-danger *
+                    //- div
+                    //-     input#email.form-control(type='email', name='email', required='', parsley-type='email', placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
+                    .form-group
+                    div
+                        input(type='hidden', value=editMode ? ''+property._id+'':'', name='propertyId')
+                    .form-group.text-right.m-b-0
+                        button.btn.btn-primary.waves-effect.waves-light(type='submit')
+                            if editMode
+                                | Actualizar
+                            else
+                                |Crear
+                        button.btn.btn-secondary.waves-effect.m-l-5(href='/properties')
+                            | Cancel
+    
