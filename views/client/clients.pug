@@ -1,95 +1,93 @@
 extends ../layouts/main-layout.pug
 
 block content
-    main
     .content
-        .container-fluid
-            .row
-                .col-lg-12
-                    .card-box
-                        .row
-                            .col-sm-8
-                                form(role='form')
-                                    .form-group.contact-search.m-b-30
-                                        input#search.form-control(type='text' placeholder='Buscar ...')
-                                        button.btn.btn-white(type='submit')
-                                            i.fa.fa-search
-                            .col-sm-4
-                                //- a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='/add-client' data-animation='fadein' data-overlayspeed='200' data-overlaycolor='#36404a')
-                                //-     i.md.md-add
-                                //-     |  Crear Cliente
-                                a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='#custom-modal', data-animation='fadein', data-plugin='custommodal', data-overlayspeed='200', data-overlaycolor='#36404a')
-                                    i.md.md-add
-                                    |  Crear Cliente
-                        .table-responsive                           
-                        if clients.length>0
-                            table.table.table-hover.mails.m-0.table.table-actions-bar
-                                thead
-                                    tr
-                                        th N
-                                        th Nombre
-                                        th Apellidos
-                                        th Telefono
-                                        th Email
-                                        th Action
-                                tbody
-                                - let i=1;
-                                each client in clients
-                                    
-                                        tr
-                                                                            
-                                            td #{i++} 
-                                            td #{client.name}
-                                            td #{client.lastName}
-                                            td #{client.phone} 
-                                            td
-                                                a(href='#') #{client.email}
-                                            td
-                                                .form-group
-                                                    form(action='/delete-client' method='POST')
-                                                        .button-list
-                                                            a.btn.btn-icon.waves-effect.waves-light.btn-primary(href='/edit-client/'+ client._id +'?edit=true')
-                                                                i.fa.fa-edit
-                                                            button.btn.btn-icon.waves-effect.waves-light.btn-danger
-                                                                i.fa.fa-remove  
-                        else  
-                                    h1 No se tienen clientes registrados
+        .row
+            .col-lg-12
+                .card-box
+                    .row
+                        .col-sm-8
+                            form(role='form')
+                                .form-group.contact-search.m-b-30
+                                    input#search.form-control(type='text' placeholder='Buscar ...')
+                                    button.btn.btn-white(type='submit')
+                                        i.fa.fa-search
+                        .col-sm-4
+                            //- a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='/add-client' data-animation='fadein' data-overlayspeed='200' data-overlaycolor='#36404a')
+                            //-     i.md.md-add
+                            //-     |  Crear Cliente
+                            a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='#custom-modal' data-animation='fadein' data-plugin='custommodal' data-overlayspeed='200' data-overlaycolor='#36404a')
+                                i.md.md-add
+                                |  Crear Cliente
+                    .table-responsive                           
+                    if clients.length>0
+                        table.table.table-hover.mails.m-0.table.table-actions-bar
+                            thead
+                                tr
+                                    th N
+                                    th Nombre
+                                    th Apellidos
+                                    th Telefono
+                                    th Email
+                                    th Action
+                            tbody
+                            - let i=1;
+                            each client in clients
+
+                                tr
+
+                                    td #{i++} 
+                                    td #{client.name}
+                                    td #{client.lastName}
+                                    td #{client.phone} 
+                                    td
+                                        a(href='#') #{client.email}
+                                    td
+                                        .form-group
+                                            form(action='/delete-client' method='POST')
+                                                .button-list
+                                                    a.btn.btn-icon.waves-effect.waves-light.btn-primary(href='/edit-client/'+ client._id +'?edit=true')
+                                                        i.fa.fa-edit
+                                                    button.btn.btn-icon.waves-effect.waves-light.btn-danger
+                                                        i.fa.fa-remove  
+                    else  
+                        h1 No se tienen clientes registrados
 
 block modal
     #custom-modal.modal-demo
-        button.close(type='button', onclick='Custombox.close();')
+        button.close(type='button' onclick='Custombox.close();')
             span ×
             span.sr-only Close
         h4.custom-modal-title Add Seller
         .custom-modal-text.text-left
-            form(role='form', action=editMode ? '/edit-client':'/add-client', method='post')
+            form(role='form', action=editMode ? '/edit-client':'/add-client' method='post')
                 .form-group
                 label(for='name')
                     | Nombres
                     span.text-danger *
-                input#name.form-control(type='text', name='name', parsley-trigger='change', required='', placeholder='Ingresar nombre', value=editMode ? ''+ client.name +'':'')
+                input#name.form-control(type='text' name='name' parsley-trigger='change' required='' placeholder='Ingresar nombre', value=editMode ? ''+ client.name +'':'')
                 .form-group
                 label(for='lastName')
                     | Apellidos
                     span.text-danger *
-                input#lastName.form-control(type='text', name='lastName', parsley-trigger='change', required='', placeholder='Ingresar Apellido', value=editMode ? ''+ client.lastName +'':'')
+                input#lastName.form-control(type='text' name='lastName' parsley-trigger='change' required='' placeholder='Ingresar Apellido', value=editMode ? ''+ client.lastName +'':'')
                 .form-group
                 label
                     | Numero de Telefono 
                     span.text-danger *
                 div
-                    input#phone.form-control(data-parsley-type='number', type='text', name='phone', required='', data-parsley-minlength='9', placeholder='Ingresar solo numeros (Minimo 9)', value=editMode ? ''+ client.phone +'':'')
+                    input#phone.form-control(data-parsley-type='number' type='text' name='phone' required='' data-parsley-minlength='9' placeholder='Ingresar solo numeros (Minimo 9)', value=editMode ? ''+ client.phone +'':'')
                 .form-group
                 label(for='email')
                     | Email
                     span.text-danger *
                 div
-                input#email.form-control(type='email', name='email', required='', parsley-type='email', placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
-                        
+                input#email.form-control(type='email' name='email' required='' parsley-type='email' placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
+
                 .form-group
                 div
-                input(type='hidden', value=editMode ? ''+client._id+'':'', name='clientId')         
-               
+                input(type='hidden', value=editMode ? ''+client._id+'':'' name='clientId')         
+
                 button.btn.btn-default.waves-effect.waves-light(type='submit')
                     if editMode
                         | Actualizar

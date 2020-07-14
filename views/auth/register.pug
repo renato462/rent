@@ -19,18 +19,18 @@ html
         .panel-heading
           h4.text-center
             | Sign Up to 
-            strong.text-custom UBold
+            strong.text-custom UBoldclear
         .p-20
-          form.form-horizontal.m-t-20(action='index.html')
+          form.form-horizontal.m-t-20(action='/register', method='post')
             .form-group
               .col-12
-                input.form-control(type='email', required='', placeholder='Email')
+                input.form-control(type='email', required='', placeholder='Email', name='email')
             .form-group
               .col-12
-                input.form-control(type='text', required='', placeholder='Username')
+                input.form-control(type='text', required='', placeholder='Username' name='userName')
             .form-group
               .col-12
-                input.form-control(type='password', required='', placeholder='Password')
+                input.form-control(type='password', required='', placeholder='Password' name='password')
             .form-group
               .col-12
                 .checkbox.checkbox-primary
@@ -41,7 +41,7 @@ html
             .form-group.text-center.m-t-40
               .col-12
                 button.btn.btn-pink.btn-block.text-uppercase.waves-effect.waves-light(type='submit')
-                  | Register
+                  | Register Renato
             .form-group.m-t-20.m-b-0
               .col-12.text-center
                 h5.font-18

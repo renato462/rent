@@ -6,7 +6,12 @@ const router = express.Router();
 
 // GET
 router.get('/login', authController.getLogin);
-router.get('/register', authController.getRegister)
+router.get('/register', authController.getRegister);
+
+//POST_LOGIN
+
+router.post('/login', authController.postLogin);
+router.post('/register', authController.postRegister);
 
 
 module.exports = router;
