@@ -16,6 +16,22 @@ exports.getAddProperty = (req, res, next)=>{
     });
 }
 
+exports.getEditProperty = (req, res, next)=>{
+    const propertyId = req.params.propertyId;
+    const editMode = req.query.edit;
+    Property.findById(propertyId)
+    .then(property =>{
+        res.render('property/add_update_property',{
+            path: "/edit-property",
+            editing: true,
+            editMode: editMode,
+            property: property,
+        })
+
+    })
+    .catch(error => console.log(error));
+
+};
 exports.postAddProperty = (req, res, next) => {
    const adressNickname = req.body.adressNickname;
    const adress = req.body.adress;
@@ -30,4 +46,14 @@ exports.postAddProperty = (req, res, next) => {
 )
    .save().then(result => {console.log(result)}).catch(error => console.log(error));
     res.redirect('/properties');
+};
+
+exports.postDeleteProperty = (req, res, next) => {
+    const propertyId = req.body.propertyId;
+    Property.findOneAndDelete(propertyId)
+    .then((result) => {
+        res.redirect('/properties');
+    })
+    .catch((err) =>console.log(err));
+
 };

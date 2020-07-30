@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const propertySchema = new Schema({
   adressNickname: { type: String },
   adress: { type: String },
-  UserId: { type: Schema.Types.ObjectID, ref: "User", required: true },
+  //UserId: { type: Schema.Types.ObjectID, ref: "User", required: true },
   aparment: [
     {
       number: { type: String, required: true },

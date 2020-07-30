@@ -7,9 +7,10 @@ const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf"); // Proteccion CSRF
 
+const { PORT, MONGODB_URI} = require('./config/index.js')
+
 // Constantes for Mongo DB y Sessions
-const MONGODB_URI =
-  "mongodb+srv://renato462:8ZnxDMjtNJke5BZK@cluster0-4srg4.mongodb.net/rent?retryWrites=true&w=majority";
+// const MONGODB_URI = MONGODB_URI;
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
@@ -24,9 +25,10 @@ const adminRouter = require("./routes/adminRoutes.js");
 const authRouter = require("./routes/authRoutes.js");
 
 // Import Models
-const Client = require("./model/client");
-const Property = require("./model/property");
+// const Client = require("./model/client");
+// const Property = require("./model/property");
 const User = require("./model/user");
+
 
 // configure the engine
 app.set("view engine", "pug");
@@ -34,6 +36,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // Public route and Bodypaser for requests
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json()); // Necesario para que Express Conozca JSON
 app.use(express.static(path.join(__dirname, "public")));
 app.use("assets", express.static(path.join(__dirname, "public")));
 app.use("plugins", express.static(path.join(__dirname, "public")));
@@ -49,14 +52,14 @@ app.use(
 );
 
 // Validando usuario
-// app.use((req, res, next) => {
-//   User.findById("5f0377b2fc34b783b043570b")
-//     .then((user) => {
-//       req.user = user;
-//       next();
-//     })
-//     .catch((err) => console.log(err));
-// });
+app.use((req, res, next) => {
+  User.findById("5f093704156a19ba5468657a")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
 
 // Register middleware
 app.use(adminRouter);
@@ -79,21 +82,21 @@ mongoose
     useFindAndModify: false,
   })
   .then((result) => {
-    // User.findOne()
-    //   .then((user) => {
-    //   if (!user) {
-    //     const user = new User({
-    //       nickName: "renato462",
-    //       name: "Renato ",
-    //       lastName: "Caldas",
-    //       email: "renato462@gmail.com",
-    //     }).save();
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-    app.listen(4000);
+    User.findOne()
+      .then((user) => {
+      if (!user) {
+        const user = new User({
+          nickName: "renato462",
+          name: "Renato ",
+          lastName: "Caldas",
+          email: "renato462@gmail.com",
+        }).save();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    app.listen(PORT);
   })
   .catch((error) => {
     console.error(error);

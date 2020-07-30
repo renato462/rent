@@ -43,7 +43,54 @@ block content
                             if editMode
                                 | Actualizar
                             else
-                                |Crear
-                        button.btn.btn-secondary.waves-effect.m-l-5(href='/properties')
+                                | Crear
+                        a.btn.btn-secondary.waves-effect.m-l-5(href='/properties')
                             | Cancel
+                        button.btn.btn-success.waves-effect.waves-light(type='button', data-toggle='modal', data-target='#con-close-modal')
+                            | Responsive Modal
+
+
     
+    #con-close-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true', style='display: none;')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    h4.modal-title Agregar Departamente y/o Cuarto
+                    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+                .modal-body
+                    .row
+                        .col-md-6
+                            .form-group
+                                label.control-label(for='field') Name
+                                input#field-1.form-control(type='text', placeholder='John')
+                        .col-md-6
+                            .form-group
+                                label.control-label(for='field-2') Surname
+                                input#field-2.form-control(type='text', placeholder='Doe')
+                    .row
+                        .col-md-12
+                            .form-group
+                                label.control-label(for='field-3') Address
+                                input#field-3.form-control(type='text', placeholder='Address')
+                    .row
+                        .col-md-4
+                            .form-group
+                                label.control-label(for='field-4') City
+                                input#field-4.form-control(type='text', placeholder='Boston')
+                        .col-md-4
+                            .form-group
+                                label.control-label(for='field-5') Country
+                                input#field-5.form-control(type='text', placeholder='United States')
+                        .col-md-4
+                            .form-group
+                                label.control-label(for='field-6') Zip
+                                input#field-6.form-control(type='text', placeholder='123456')
+                    .row
+                        .col-md-12
+                            .form-group.no-margin
+                                label.control-label(for='field-7') Personal Info
+                                textarea#field-7.form-control(placeholder='Write something about yourself')
+                .modal-footer
+                    button.btn.btn-secondary.waves-effect(type='button', data-dismiss='modal') Close
+                    button.btn.btn-info.waves-effect.waves-light(type='button') Save changes
+        // /    .

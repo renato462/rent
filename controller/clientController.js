@@ -92,8 +92,7 @@ exports.postEditClient = (req, res) => {
 
 exports.postDeleteClient = (req, res) => {
   const DeleteClientId = req.body.clientId;
-  //   const DeleteClientId = req.params.clientId;
-  console.log(DeleteClientId);
+ 
   Client.findOneAndDelete(DeleteClientId)
     .then((result) => {
       console.log("Cliente Deleted");

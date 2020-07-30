@@ -39,11 +39,12 @@ block content
                                         td #{property.adress}
                                         td #{property.aparment.length} 
                                         td
-                                            .form-group
-                                                form(action='/delete-property' method='POST')
-                                                    .button-list
+                                            form(action='/delete-property' method='POST')
+                                                .row
+                                                    .col-6
                                                         a.btn.btn-icon.waves-effect.waves-light.btn-primary(href='/edit-property/'+ property._id +'?edit=true')
                                                             i.fa.fa-edit
+                                                    .col-6
                                                         button.btn.btn-icon.waves-effect.waves-light.btn-danger
                                                             i.fa.fa-remove
                         else
