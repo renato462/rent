@@ -66,9 +66,22 @@ app.use(adminRouter);
 app.use(authRouter);
 
 app.use((req, res) => {
-  // console.log(res.status(404));
+  //console.log(res.status(404));
   res.status(404).render("error/404", {
     layout: "../error/404",
+    pageTitle: "Page Not Found",
+  });
+});
+
+// manejar errores sin que la herramienta explote
+app.use((error, req, res, next) => {
+  //console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  
+  res.status(status).render("error/500", {
+    layout: "../error/500",
     pageTitle: "Page Not Found",
   });
 });
