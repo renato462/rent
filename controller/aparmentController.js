@@ -1,8 +1,8 @@
 const Aparment = require('../model/aparment');
-const { ITEMS_PER_PAGE} = require('../config/index.js');
+const {ITEMS_PER_PAGE} = require('../config/index.js');
 
 exports.getApaments = (req, res, next) => {
-    const page = req.query.page;
+    const page = +req.query.page;
     let aparmentTotal;
     Aparment.countDocuments().then((count) => {
         aparmentTotal = count;
@@ -16,15 +16,16 @@ exports.getApaments = (req, res, next) => {
         aparments: aparments,
         pageTitle: 'Aparments',
         path: '/aparments',
-        aparmentTotal: aparmentTotal,
-        currentPage: page,
+        currentPage: page || 1,
         hasNextPage: ITEMS_PER_PAGE * page < aparmentTotal,
         hasPreviousPage: page > 1,
         nextPage: page + 1,
         previousPage: page - 1,
-        lastPage: Math.ceil(aparmentTotal / ITEMS_PER_PAGE)
+        totalPagination: Math.ceil(aparmentTotal / ITEMS_PER_PAGE),
+        numerOfItem: ITEMS_PER_PAGE*(page||1) - ITEMS_PER_PAGE,  
        });    
     })
+    .catch(error => console.log(error))
 };
 
 exports.getJsonApaments = (req, res, next) => {
@@ -33,6 +34,22 @@ exports.getJsonApaments = (req, res, next) => {
         res.status(200).json({aparments: aparments});
         })    
     };
+
+exports.postJsonAddAparment = (req, res, next) =>{
+    const code = req.body.code;
+    const price = req.body.price;
+    const aparment = new Aparment({
+        code: code,
+        price: price
+    })
+    .save()
+    .then((result) => {
+        res.status(200).json({message: 'Departamento Creado'})
+    })
+    .catch((err) => {
+        res.status(500).json({message: 'Fallo la creacion del cliente intente de nuevo'});
+    });
+};
 
 exports.postAddAparment = (req, res, next) =>{
     const code = req.body.code;
@@ -43,7 +60,7 @@ exports.postAddAparment = (req, res, next) =>{
     })
     .save()
     .then((result) => {
-        res.status(200).json({message: 'Departamento Creado'})
+        res.redirect('/aparments');
     })
     .catch((err) => {
         res.status(500).json({message: 'Fallo la creacion del cliente intente de nuevo'});

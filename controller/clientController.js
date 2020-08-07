@@ -68,7 +68,8 @@ exports.getEditClient = (req, res, next) => {
         client: client,
       });
     })
-    .catch((err) => {
+    .catch((err) => { 
+      
       console.log(err);
     });
 };
