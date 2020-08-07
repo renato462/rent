@@ -12,13 +12,14 @@ block content
                                 button#btn-search.btn.btn-white
                                     i.fa.fa-search
                         .col-sm-4
-                            //- a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='/add-client' data-animation='fadein' data-overlayspeed='200' data-overlaycolor='#36404a')
-                            //-     i.md.md-add
-                            //-     |  Crear Client
-                            button.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(type='button' data-toggle='modal' data-target='#con-close-modal')
+                            a.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(href='#custom-modal' data-plugin="custommodal" data-animation='fadein' data-overlayspeed='200' data-overlaycolor='#36404a')
                                 i.md.md-add
                                 |  Crear Cuarto o Departamento
+                            //- button.btn.btn-default.btn-md.waves-effect.waves-light.m-b-30(type='button' data-toggle='modal' data-target='#con-close-modal')
+                            //-     i.md.md-add
+                            //-     |  Crear Cuarto o Departamento
                             //- button#loadAparment.btn.btn-info.waves-effect.waves-light(type='button') Cargar
+                            
                     .table-responsive                           
                         if aparments.length>0
                             table#table.table.table-hover.mails.m-0.table.table-actions-bar
@@ -50,65 +51,131 @@ block content
                                                     .col-6
                                                         button.btn.btn-icon.waves-effect.waves-light.btn-danger
                                                             i.fa.fa-remove  
+                        
+                            nav
+                                
+                                ul#pagination.pagination.pagination-split.justify-content-center
+                                    
+                                        li.page-item
+                                            a(class ='page-link', href='#', aria-label='Previous')
+                                                span(aria-hidden='true') «
+                                                span.sr-only Previous
+                                        
+                                        - let j = 1;
+                                            
+                                        while j < 5 
+                                        li(class=("page-item active"))
+                                             a.page-link(href='/aparments?page='+j)
+                                                | #{j}
+                                        - j++
+                                              
+                                        li.page-item
+                                            a.page-link(href='#', aria-label='Next')
+                                                span(aria-hidden='true') »
+                                                span.sr-only Next
+                
                         else  
                             h4 No se tienen Cuartos o Departamentos Registrados
+                        
+//- block modal
+//-     #con-close-modal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' style='display: none;')
+//-         .modal-dialog
+//-             .modal-content
+//-                 .modal-header
+//-                     h4.modal-title Agregar Cuarto o Departamento
+//-                     button.close(type='button' data-dismiss='modal' aria-hidden='true') ×
+//-                 .modal-body
+//-                     .row
+//-                         .col-md-12
+//-                             .form-group
+//-                                 label.control-label(for='field-1') Local
+//-                                 input#field-1.form-control(type='text' placeholder='Selecionar Local')
+//-                     .row
+//-                         .col-md-6
+//-                             .form-group
+//-                                 label.control-label(for='field-2') Codigo
+//-                                 input#field-2.form-control(type='text' placeholder='Completar el codigo por ejemplo: 201')
+//-                         .col-md-6
+//-                             .form-group
+//-                                 label.control-label(for='field-3') Precio
+//-                                 input#field-3.form-control(type='number' placeholder='Precio de cuarto o departamento')
+//-                     .row
+//-                         .col-md-4
+//-                             .form-group
+//-                                 label.control-label(for='field-4') City
+//-                                 input#field-4.form-control(type='text' placeholder='Boston')
+//-                         .col-md-4
+//-                             .form-group
+//-                                 label.control-label(for='field-5') Country
+//-                                 input#field-5.form-control(type='text' placeholder='United States')
+//-                         .col-md-4
+//-                             .form-group
+//-                                 label.control-label(for='field-6') Zip
+//-                                 input#field-6.form-control(type='text' placeholder='123456')
+//-                     .row
+//-                         .col-md-12
+//-                             .form-group.no-margin
+//-                                 label.control-label(for='field-7') Personal Info
+//-                                 textarea#field-7.form-control(placeholder='Write something about yourself')
+//-                 .modal-footer
+//-                     button.btn.btn-secondary.waves-effect(type='button' data-dismiss='modal') Close
+//-                     button#newUpdateAparment.btn.btn-info.waves-effect.waves-light(type='button') Save changes
 
 block modal
-    #con-close-modal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='myModalLabel' aria-hidden='true' style='display: none;')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    h4.modal-title Agregar Cuarto o Departamento
-                    button.close(type='button' data-dismiss='modal' aria-hidden='true') ×
-                .modal-body
-                    .row
-                        .col-md-12
-                            .form-group
-                                label.control-label(for='field-1') Local
-                                input#field-1.form-control(type='text' placeholder='Selecionar Local')
-                    .row
-                        .col-md-6
-                            .form-group
-                                label.control-label(for='field-2') Codigo
-                                input#field-2.form-control(type='text' placeholder='Completar el codigo por ejemplo: 201')
-                        .col-md-6
-                            .form-group
-                                label.control-label(for='field-3') Precio
-                                input#field-3.form-control(type='number' placeholder='Precio de cuarto o departamento')
-                    .row
-                        .col-md-4
-                            .form-group
-                                label.control-label(for='field-4') City
-                                input#field-4.form-control(type='text' placeholder='Boston')
-                        .col-md-4
-                            .form-group
-                                label.control-label(for='field-5') Country
-                                input#field-5.form-control(type='text' placeholder='United States')
-                        .col-md-4
-                            .form-group
-                                label.control-label(for='field-6') Zip
-                                input#field-6.form-control(type='text' placeholder='123456')
-                    .row
-                        .col-md-12
-                            .form-group.no-margin
-                                label.control-label(for='field-7') Personal Info
-                                textarea#field-7.form-control(placeholder='Write something about yourself')
-                .modal-footer
-                    button.btn.btn-secondary.waves-effect(type='button' data-dismiss='modal') Close
-                    button#newUpdateAparment.btn.btn-info.waves-effect.waves-light(type='button') Save changes
+    #custom-modal.modal-demo
+        button.close(type='button' onclick='Custombox.close();')
+            span ×
+            span.sr-only Close
+        h4.custom-modal-title Crear Departamento
+        .custom-modal-text.text-left
+                //form(role='form',  method='post')
+                .form-group
+                label(for='property')
+                    | Propiedad
+                    span.text-danger *
+                input#property.form-control(type='text' name='property' parsley-trigger='change' required='' placeholder='Ingresar Propiedad', value=editMode ? ''+ client.name +'':'')
+                .form-group
+                label(for='code')
+                    | Codigo
+                    span.text-danger *
+                input#code.form-control(type='text' name='code' parsley-trigger='change' required='' placeholder='Ingresar Codigo', value=editMode ? ''+ client.lastName +'':'')
+                .form-group
+                label
+                    | Costo 
+                    span.text-danger *
+                div
+                    input#price.form-control(data-parsley-type='number' type='text' name='price' required='' data-parsley-minlength='1' placeholder='Ingresar Monto', value=editMode ? ''+ client.phone +'':'')
+                //- .form-group
+                //- label(for='email')
+                //-     | Email
+                //-     span.text-danger *
+                //- div
+                //- input#email.form-control(type='email' name='email' required='' parsley-type='email' placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
 
+                .form-group
+                div
+                input(type='hidden', value=editMode ? ''+aparment._id+'':'' name='clientId')         
 
+                button#newUpdateAparment.btn.btn-default.waves-effect.waves-light(type='submit')
+                    if editMode
+                        | Actualizar
+                    else
+                        |Crear
+                button.btn.btn-danger.waves-effect.waves-light.m-l-10(type='button' onclick='Custombox.close();')
+                    | Cancel
 
 
 
     script.
+        //- import swal from 'sweetalert';
+
         const btnNewUpdateAparment = document.getElementById('newUpdateAparment');
-        const btnLoadAparment = document.getElementById('loadAparment');
-
+        //const btnLoadAparment = document.getElementById('loadAparment');
+        
         const createAparment = () => {
-            const code = document.getElementById('field-2').value;
-            const price = document.getElementById('field-3').value;
-
+            const code = document.getElementById('code').value;
+            const price = document.getElementById('price').value;
+          
             if(code =='' || price == ''){
                 return;
             }
@@ -125,11 +192,19 @@ block modal
                 console.log('Renato Caldas');
                 loadAparment();
                 
-                const body = document.querySelector('.widescreen');
-                body.classList.remove('modal-open');
-                body.style.paddingRight = '';
-                document.getElementById('con-close-modal').style.display = 'none';
-                document.querySelector('.modal-backdrop').remove();
+                //- const body = document.querySelector('.widescreen');
+                //- body.classList.remove('modal-open');
+                //- body.style = '';
+                //- document.getElementById('con-close-modal').style.display = 'none';
+                //- document.querySelector('.modal-backdrop').remove('show');
+                  Custombox.close();
+                  swal({
+                    title: "Creado: Cuarto o Departamento",
+                    text: `Codigo: ${code} y Precio: S/.${price} `,
+                    icon: "success",
+                    button: "Ok",
+                    });
+            //-    alert('Renato Caldas');
             });
         };
 
@@ -145,8 +220,7 @@ block modal
                 const table = document.getElementById("table");
                 const tableBody = document.querySelector('tbody');
                 console.log(data);
-                generateTable(table,data.aparments, tableBody);
-
+                generateTable(table,data.aparments, tableBody);        
 
              });
          };
@@ -200,13 +274,29 @@ block modal
                     `
             }
         }
+         const loadPagination = () =>
+         {
+            let i =1;
 
+            const ul = document.getElementById("pagination");
 
+            for (i; i<= 10; i++)
+                {
+                ul.appendChild.innerHTML =
+                `<li class="page-item">
+                    <a class="page-link" href='/aparment?page=${i}'>${i}</a>
+                 </li>
+                `   
+                }
+         }
 
+        loadPagination();
         btnNewUpdateAparment.addEventListener('click',createAparment);
-        btnLoadAparment.addEventListener("click",loadAparment);
+        //btnLoadAparment.addEventListener("click",loadAparment);
 
-    script(src="../assets/js/logical/clients.js")     
-
+    script(src="../assets/js-logical/filterTable.js")
+    //- script(src="../plugins/sweet-alert2/sweetalert2.min.js")
+    //- script(src="../assets/pages/jquery.sweet-alert2.init.js")
+    script(src="https://unpkg.com/sweetalert/dist/sweetalert.min.js")     
 
 

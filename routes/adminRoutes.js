@@ -25,7 +25,7 @@ router.post('/add-property', propertyController.postAddProperty);
 router.post('/delete-property', propertyController.postDeleteProperty);
 
 // Admin Aparment routes => GET 
-router.get('/aparment', aparmentController.getApaments);
+router.get('/aparments', aparmentController.getApaments);
 router.get('/aparment-json', aparmentController.getJsonApaments);
 
 // Admin Aparment routes => POST 
