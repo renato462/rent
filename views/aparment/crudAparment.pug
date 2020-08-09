@@ -1,0 +1,73 @@
+extends ../layouts/main-layout.pug
+block content
+    .content
+    .container-fluid
+    .row
+       .col-lg-12
+           .card-box 
+                h4.custom-modal-title 
+                    if editMode
+                        |Actualizar Cuarto y/o Departamento
+                    else
+                        |Crer Departamento
+                .custom-modal-text.text-left
+                    form(role='form', action=editMode ? '/edit-aparment':'/add-aparment' method='post')
+                        .form-group
+                        label(for='property')
+                            | Propiedad
+                            span.text-danger *
+                        select.form-control(name="propertyId" parsley-trigger='change' required='')
+                            if !editMode
+                                option(value="") Seleccionar Propiedad
+                                each property in properties
+                                    option(value= property._id) #{property.adressNickname}
+                            else
+                                each property in properties
+                                    - let selected= (aparment.propertyId._id.toString() == property._id.toString()) ?'true':null;
+                                    
+                                    option(selected=selected value= property._id ) #{property.adressNickname} / #{selected}
+                            
+                        //- input#property.form-control(type='text' name='property' parsley-trigger='change' required='' placeholder='Ingresar Propiedad', value=editMode ? 'Por definir':'')
+                        .row
+                            .col-6
+                                .form-group
+                                label(for='code')
+                                    | Codigo
+                                    span.text-danger *
+                                input.form-control(type='text' name='code' parsley-trigger='change' required='' placeholder='Ingresar Codigo', value=editMode ? ''+ aparment.code +'':'')
+                         
+                            .col-6
+                                .form-group
+                                label(for='floor')
+                                    | Piso
+                                    span.text-danger *
+                                input.form-control(type='text' name='floor' parsley-trigger='change' required='' placeholder='Ingresar Piso', value=editMode ? ''+ aparment.floor +'':'')
+                        
+                        .form-group
+                        label
+                            | Costo 
+                            span.text-danger *
+                        div.input-group.mb-3
+                            div.input-group-prepend
+                                span.input-group-text S/.
+                                - let numberFormat = aparment ? new Intl.NumberFormat("en-US", {minimumFractionDigits:2}).format(+aparment.price) : null;
+                            input#price.form-control(data-parsley-type='number' type='text' name='price' required='' data-parsley-minlength='1' placeholder='Ingresar Monto', value=editMode ? ''+ numberFormat +'':'')
+                        //- .form-group
+                        //- label(for='email')
+                        //-     | Email
+                        //-     span.text-danger *
+                        //- div
+                        //- input#email.form-control(type='email' name='email' required='' parsley-type='email' placeholder='ingresar Email', value=editMode ? ''+ client.email+'':'')
+
+                        .form-group
+                        div
+                        input(type='hidden', value=editMode ? ''+aparment._id+'':'' name='aparmentId')         
+
+                        button#newUpdateAparment.btn.btn-default.waves-effect.waves-light(type='submit')
+                            if editMode
+                                | Actualizar
+                            else
+                                |Crear
+                        a.btn.btn-danger.waves-effect.waves-light.m-l-10(href='/aparments')
+                            | Cancel
+                        

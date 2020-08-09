@@ -11,6 +11,10 @@ const aparmentSchema = new Schema({
         type: String,
         required:true
     },
+    floor: { 
+        type: String, 
+        required: true 
+    },
     rentId: {
         type: String,
     },
@@ -19,9 +23,11 @@ const aparmentSchema = new Schema({
         
     },
     propertyId:{
-        type: Number,
-       
-    }
+        type: Schema.Types.ObjectId, 
+        ref:'Property', 
+        required: true 
+    },
+    
 }, 
 { 
     timestamps: true 

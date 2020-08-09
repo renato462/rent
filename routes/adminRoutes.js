@@ -27,9 +27,12 @@ router.post('/delete-property', propertyController.postDeleteProperty);
 // Admin Aparment routes => GET 
 router.get('/aparments', aparmentController.getApaments);
 router.get('/aparment-json', aparmentController.getJsonApaments);
+router.get('/add-aparment', aparmentController.getAddAparment);
+router.get('/edit-aparment/:aparmentId', aparmentController.getEditAparment);
 
 // Admin Aparment routes => POST 
 router.post('/add-aparment', aparmentController.postAddAparment);
+router.post('/edit-aparment', aparmentController.postEditAparment);
 
 module.exports = router;
 
